@@ -3,10 +3,7 @@ import pandas as pd
 import tkinter as tk
 from tkinter import ttk
 import time
-import pandas as pd
-import tkinter as tk
-from tkinter import ttk
-import time
+
 
 # Importo las librerias necesarias, pandas para manejar los datos y ykinter para hacer la interfaz básica que funciona
 data = pd.read_csv('data.csv')
@@ -19,6 +16,7 @@ class Node:
         self.next = None
 
 
+
 class HashTable:
     def __init__(self, capacity):  # cramos la hash table y definimos parámetros para poder definir su tamaño más tarde
         self.capacity = capacity
@@ -26,8 +24,7 @@ class HashTable:
         self.table = [None] * capacity
 
     def _hash(self, key):
-        return hash(
-            key) % self.capacity  # Al hacer la moda de la clave hash nos da el número de casilla donde se guardará la información, este puede repetirse, pero eso no es un problema, dado que se guardará varios elementos en la misma casilla, si esto pasara mucho relentizaría el algoritmo de búsqueda, por ello me aseguro de hacer una tabla significativamente mas grande que el numero de datos, para evitar este problema, aunque eso augmenta la cantidad de memoria que requiere la tabla.
+        return hash(key) % self.capacity  # Al hacer la moda de la clave hash nos da el número de casilla donde se guardará la información, este puede repetirse, pero eso no es un problema, dado que se guardará varios elementos en la misma casilla, si esto pasara mucho relentizaría el algoritmo de búsqueda, por ello me aseguro de hacer una tabla significativamente mas grande que el numero de datos, para evitar este problema, aunque eso augmenta la cantidad de memoria que requiere la tabla.
 
     def insert(self, key, value):
         index = self._hash(key)  # Esta funcion mete los datos, y si la tabla es muy pequeña añade espacios.
@@ -81,15 +78,12 @@ class HashTable:
     def __len__(self):
         return self.size  # Nos dice el tamaño de la tabla
 
-    def __contains__(self,
-                     key):  # Busca si en la tabla existe el elemento, este a diferencia del search no da error si falla
+    def __contains__(self, key):  # Busca si en la tabla existe el elemento, este a diferencia del search no da error si falla
         try:
             self.search(key)
             return True
         except KeyError:
             return False
-
-
 ht = HashTable(10000000)
 
 df = pd.DataFrame(data)
