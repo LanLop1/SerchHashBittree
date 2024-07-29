@@ -45,14 +45,19 @@ class HashTable:
             self.size += 1
 
     def search(self, key):
+        Pelis=[]
         index = self._hash(key)
 
-        current = self.table[
-            index]  # Esta funcion busca en la hash tabla el elemento que coincide con el id que le hemos proporcionado
+        current = self.table[index]  # Esta funcion busca en la hash tabla el elemento que coincide con el id que le hemos proporcionado
         while current:
             if current.key == key:
-                return current.value
-            current = current.next
+                Pelis= Pelis.append(current.value)
+                print(Pelis)
+                print(f"current: {current.value}")
+                current = current.next
+
+            return Pelis
+            
 
         raise KeyError(key)
 
@@ -97,8 +102,7 @@ for index, row in df.iterrows():
 def search_movie():
     inicio = time.time()
     query = search_var.get().strip()
-    result = ht.search(
-        query)  # recibe input y usa la función de búsqueda en la hash table, tmb medimos el tiempo de ejecución de la
+    result = ht.search(query)  # recibe input y usa la función de búsqueda en la hash table, tmb medimos el tiempo de ejecución de la
     result_var.set(result)  # busqueda
     final = time.time()
     tiempo_busqueda = final - inicio
