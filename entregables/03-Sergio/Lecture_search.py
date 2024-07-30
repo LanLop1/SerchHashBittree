@@ -45,21 +45,19 @@ class HashTable:
             self.size += 1
 
     def search(self, key):
-        Pelis=[]
+        Pelis = []
         index = self._hash(key)
+        current = self.table[index]
 
-        current = self.table[index]  # Esta funcion busca en la hash tabla el elemento que coincide con el id que le hemos proporcionado
         while current:
             if current.key == key:
-                Pelis= Pelis.append(current.value)
-                print(Pelis)
-                print(f"current: {current.value}")
-                current = current.next
+                Pelis.append(current.value)
+            current = current.next
 
+        if Pelis:
             return Pelis
-            
-
-        raise KeyError(key)
+        else:
+            raise KeyError(key)
 
     def remove(self, key):
         index = self._hash(key)  # Borra elementos de la tabla
@@ -89,25 +87,29 @@ class HashTable:
             return True
         except KeyError:
             return False
-ht = HashTable(10000000)
+ht = HashTable(2000000)
 
 df = pd.DataFrame(data)
 i = 0
 for index, row in df.iterrows():
-    ht.insert(row["title"], df.loc[
-        i])  # Uso el índice para llevar la cuenta de las filas que se van añadiendo y las voy añadiendo una a una.                 una,                                esto es lo que tarda mas de
+    resultado = df[df['title'] == row["title"]]
+    ht.insert(row["title"], resultado)  # Uso el índice para llevar la cuenta de las filas que se van añadiendo y las voy añadiendo una a una. 
     i = i + 1  # Este proceso el lo que tarda más del programa dado que genera la hash table
 
 
 def search_movie():
     inicio = time.time()
     query = search_var.get().strip()
-    result = ht.search(query)  # recibe input y usa la función de búsqueda en la hash table, tmb medimos el tiempo de ejecución de la
-    result_var.set(result)  # busqueda
+    try:
+        results = ht.search(query)
+        print(results)
+        result_str = '\n\n'.join([str(result) for result in results])
+        result_var.set(result_str)
+    except KeyError:
+        result_var.set("No se encontró la película.")
     final = time.time()
     tiempo_busqueda = final - inicio
     print(tiempo_busqueda)
-
 
 # Crear la ventana principal
 root = tk.Tk()
