@@ -6,7 +6,7 @@ import time
 
 
 # Importo las librerias necesarias, pandas para manejar los datos y ykinter para hacer la interfaz básica que funciona
-data = pd.read_csv('data.csv')
+data = pd.read_csv('data_ordenado.csv')
 
 
 class Node:
