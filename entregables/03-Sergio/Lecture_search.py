@@ -92,8 +92,9 @@ ht = HashTable(2000000)
 df = pd.DataFrame(data)
 i = 0
 for index, row in df.iterrows():
-    resultado = df[df['title'] == row["title"]]
-    ht.insert(row["title"], resultado)  # Uso el índice para llevar la cuenta de las filas que se van añadiendo y las voy añadiendo una a una. 
+    # resultado = df[df['title'] == row["title"]]  -Estas dos líneas podrían cambiar el algoritmo para que pudiera sacar todas las películas, pero hace que construir la hash table tarde demasiado.
+    # ht.insert(row["title"], resultado)
+    ht.insert(row["title"], df.loc[i])  # Uso el índice para llevar la cuenta de las filas que se van añadiendo y las voy añadiendo una a una. 
     i = i + 1  # Este proceso el lo que tarda más del programa dado que genera la hash table
 
 
