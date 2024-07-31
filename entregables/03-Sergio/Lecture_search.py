@@ -88,7 +88,7 @@ df = pd.DataFrame(data)
 
 for index, row in df.iterrows():
     ht.insert(row["title"], row)
-
+# interfaz de programa
 class MovieSearcher:
     def __init__(self, root, hashtable):
         self.root = root
