@@ -1,7 +1,7 @@
 #%%
 import matplotlib.pyplot as plt
 
-data = [0.008029460906982422, 10.896265506744385]
+data = [0.05374550819396973, 10.896265506744385]
 buscadores = ['Hash Table', 'Biblioteca Pandas']
 
 # Crear gráfico de barras

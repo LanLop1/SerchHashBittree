@@ -1,10 +1,11 @@
+#%%
 import pandas as pd
 import tkinter as tk
 from tkinter import ttk
 import time
 
 # Leer el archivo CSV
-data = pd.read_csv('data_ordenado.csv')
+data = pd.read_csv('data.csv')
 
 class Node:
     def __init__(self, key, value):
@@ -126,11 +127,16 @@ class MovieSearcher:
     def search_movie(self):
         query = self.search_var.get().strip()
         try:
+            inicio = time.time()
             self.results = self.ht.search(query)
             self.current_index = 0
             if self.results:
                 self.show_result()
                 self.update_navigation_buttons()
+                final= time.time()
+                tiempo = final - inicio
+                print(tiempo)
+
             else:
                 self.result_var.set("No se encontró la película.")
                 self.next_button.config(state=tk.DISABLED)
